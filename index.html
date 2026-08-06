@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="description" content="HYDROS prototype, a New Mexico digital water management portal.">
   <title>HYDROS | New Mexico Water Management</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.6.1/dist/maplibre-gl.css">\n  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -83,27 +83,67 @@
   </div>
 </section>
 
-<section class="section data-section" id="data">
-  <div class="wrap data-grid">
-    <div class="data-copy"><p class="kicker">HYDROS Atlas</p><h2>See water in place.</h2><p>Move from statewide conditions to basin, district, parcel, structure, and document context. The production platform would embed approved read-only ArcGIS Online experiences and pair every map with accessible summaries.</p>
-      <div class="layer-list"><button class="active" data-layer="rivers">Rivers & streams</button><button data-layer="basins">Water basins</button><button data-layer="wells">Wells</button><button data-layer="rights">Water rights</button><button data-layer="reservoirs">Reservoirs</button><button data-layer="districts">District offices</button></div>
-      <button class="button primary" data-dialog="Launch HYDROS Atlas|This prototype map demonstrates the future experience. A production map would use approved ArcGIS Online layers and agency metadata.">Launch full map</button>
+<section class="section data-section atlas-section" id="data">
+  <div class="wrap atlas-intro">
+    <div><p class="kicker">HYDROS Atlas • GeoLibre pattern</p><h2>New Mexico water is a connected system.</h2></div>
+    <p>Explore rivers, tributaries, reservoirs, conveyances, major basins, OSE district context, and the communities that depend on them—from Colorado headwaters through New Mexico to El Paso and Ciudad Juárez.</p>
+  </div>
+  <div class="water-workspace">
+    <aside class="gis-sidebar" aria-label="Water atlas layers">
+      <div class="gis-title"><span class="live-dot"></span><div><strong>Layer stack</strong><small>Cloud-native GIS workspace</small></div></div>
+      <div class="layer-group"><span>HYDROLOGY</span>
+        <label><input type="checkbox" data-gis-layer="rivers" checked> Rivers & tributaries <b>14</b></label>
+        <label><input type="checkbox" data-gis-layer="reservoirs" checked> Reservoirs <b>12</b></label>
+        <label><input type="checkbox" data-gis-layer="basins" checked> Major basins <b>6</b></label>
+      </div>
+      <div class="layer-group"><span>ADMINISTRATION</span>
+        <label><input type="checkbox" data-gis-layer="districts" checked> OSE district context <b>7</b></label>
+        <label><input type="checkbox" data-gis-layer="conveyances" checked> Conveyances & projects <b>6</b></label>
+        <label><input type="checkbox" data-gis-layer="consumers" checked> Demand centers <b>8</b></label>
+      </div>
+      <div class="layer-group"><span>REFERENCE</span>
+        <label><input type="checkbox" data-gis-layer="mexico" checked> Mexico / compact context</label>
+        <label><input type="checkbox" data-gis-layer="terrain"> 3D terrain emphasis</label>
+      </div>
+      <div class="gis-source">
+        <strong>Data lineage</strong>
+        <a href="https://www.ose.nm.gov/GIS/index.php" target="_blank" rel="noopener">NMOSE Enterprise GIS ↗</a>
+        <a href="https://www.usgs.gov/national-hydrography/nhdplus-high-resolution" target="_blank" rel="noopener">USGS NHDPlus HR ↗</a>
+        <a href="https://www.usgs.gov/national-hydrography/watershed-boundary-dataset" target="_blank" rel="noopener">USGS WBD ↗</a>
+        <small>Prototype layers are generalized for web display. Production should bind authoritative OSE/USGS services and metadata.</small>
+      </div>
+    </aside>
+    <div class="gis-main">
+      <div class="map-toolbar">
+        <div><strong>NEW MEXICO WATER SYSTEM</strong><span id="mapStatus">6 layer groups visible</span></div>
+        <div class="map-actions"><button id="fitState">New Mexico</button><button id="fitRio">Rio Grande</button><button id="fitBorder">Border system</button><button id="tiltMap">3D tilt</button></div>
+      </div>
+      <div id="waterMap" role="application" aria-label="Interactive GIS map of New Mexico rivers, tributaries, reservoirs, basins, OSE districts, conveyances and water demand centers"></div>
+      <div class="map-readout">
+        <span><i class="legend-river"></i>River / tributary</span><span><i class="legend-reservoir"></i>Reservoir</span><span><i class="legend-conveyance"></i>Conveyance</span><span><i class="legend-consumer"></i>Demand center</span><small id="coordReadout">106.0°W • 34.5°N</small>
+      </div>
     </div>
-    <div class="map-card">
-      <div class="map-top"><strong>New Mexico Water Atlas</strong><span id="layerLabel">Rivers & streams</span></div>
-      <svg class="nm-map" viewBox="0 0 700 560" role="img" aria-label="Stylized map of New Mexico water features">
-        <defs><pattern id="dots" width="12" height="12" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#97795d" opacity=".25"/></pattern></defs>
-        <path class="state-shape" d="M170 40 L535 48 L530 145 L585 155 L570 500 L138 492 L148 285 L105 260 L150 232 Z"/>
-        <path class="region r1" d="M180 63 C290 92 250 170 333 245 C367 278 330 385 265 470 L158 466 L164 276 L127 255 L165 223 Z"/>
-        <path class="region r2" d="M187 61 L500 70 L494 181 C402 160 370 220 326 232 C257 168 300 102 187 61 Z"/>
-        <path class="region r3" d="M342 248 C403 215 430 164 502 195 L545 469 L280 472 C352 395 386 295 342 248 Z"/>
-        <path class="rio main" d="M315 56 C297 117 344 153 315 218 C286 279 352 325 318 385 C298 420 315 459 300 497"/>
-        <path class="rio" d="M256 86 C275 128 260 171 315 218"/><path class="rio" d="M455 105 C419 171 435 230 392 292 C366 332 389 402 366 468"/><path class="rio thin" d="M205 205 C241 218 266 244 292 273"/>
-        <g class="reservoir-dots"><circle cx="314" cy="218" r="10"/><circle cx="318" cy="384" r="10"/><circle cx="392" cy="292" r="9"/><circle cx="274" cy="143" r="8"/></g>
-        <g class="map-labels"><text x="238" y="118">SAN JUAN</text><text x="310" y="170">RIO CHAMA</text><text x="326" y="285">RIO GRANDE</text><text x="406" y="340">PECOS</text><text x="205" y="370">GILA</text></g>
-      </svg>
-      <div class="map-legend"><span><i class="line"></i> Rivers</span><span><i class="fill"></i> Basins</span><span><i class="dot"></i> Reservoirs</span><small>Illustrative prototype map</small></div>
-    </div>
+    <aside class="scribe-panel" aria-label="Water Scribe AI assistant">
+      <div class="scribe-head"><span class="scribe-mark">≈</span><div><p>WATER SCRIBE</p><strong>GIS Copilot</strong></div><b>ALPHA</b></div>
+      <div class="scribe-chat" id="scribeChat" aria-live="polite">
+        <div class="scribe-message system">Ask me about the water on this map. I can explain a river system, trace a conveyance, compare basins, identify nearby demand centers, or focus the map.</div>
+        <div class="scribe-message ai"><strong>Try:</strong> “Trace the Rio Grande to Mexico” or “Show me the San Juan–Chama Project.”</div>
+      </div>
+      <div class="scribe-prompts">
+        <button data-scribe="Trace the Rio Grande to Mexico">Trace Rio Grande</button>
+        <button data-scribe="Show the San Juan-Chama Project">San Juan–Chama</button>
+        <button data-scribe="Which reservoirs serve the Middle Rio Grande?">Middle Rio Grande</button>
+        <button data-scribe="Show OSE districts">OSE districts</button>
+      </div>
+      <form id="scribeForm"><label class="sr-only" for="scribeInput">Ask Water Scribe</label><input id="scribeInput" placeholder="Ask Water Scribe…"><button aria-label="Send question">→</button></form>
+      <p class="scribe-note">Prototype assistant • answers use the mapped reference layer set, not an official legal determination.</p>
+    </aside>
+  </div>
+  <div class="wrap atlas-cards">
+    <article><span>HEADWATERS</span><strong>Colorado → Rio Chama</strong><p>San Juan–Chama diversions connect Colorado River Basin headwaters to the Rio Grande Basin.</p></article>
+    <article><span>CORE SYSTEM</span><strong>Rio Grande corridor</strong><p>Abiquiu, Cochiti, Elephant Butte and Caballo frame storage and river operations through central and southern New Mexico.</p></article>
+    <article><span>CROSS-BORDER</span><strong>El Paso • Ciudad Juárez</strong><p>The river and Rio Grande Project continue beyond New Mexico; HYDROS keeps downstream users and compact context visible.</p></article>
+    <article><span>EASTERN BASIN</span><strong>Pecos → Texas</strong><p>Santa Rosa, Sumner and Brantley sit on a separate interstate river system with its own compact obligations.</p></article>
   </div>
 </section>
 
@@ -162,6 +202,6 @@
 </footer>
 
 <dialog id="dialog"><button class="dialog-x" aria-label="Close">×</button><p class="kicker">HYDROS prototype</p><h2 id="dialogTitle"></h2><p id="dialogText"></p><button class="button primary dialog-close">Close</button></dialog>
-<script src="app.js"></script>
+<script src="https://unpkg.com/maplibre-gl@5.6.1/dist/maplibre-gl.js"></script>\n<script src="app.js"></script>
 </body>
 </html>
