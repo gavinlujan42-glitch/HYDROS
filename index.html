@@ -1,127 +1,167 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="HYDROS, a prototype New Mexico digital water platform." />
-  <title>HYDROS | New Mexico Digital Water Platform</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Libre+Franklin:wght@600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="HYDROS prototype, a New Mexico digital water management portal.">
+  <title>HYDROS | New Mexico Water Management</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to main content</a>
-  <header class="site-header">
-    <div class="utility-bar">
-      <span>Official prototype for digital water services</span>
-      <nav aria-label="Utility navigation">
-        <a href="#accessibility">Accessibility</a>
-        <a href="#contact">Contact</a>
-        <button id="languageToggle" class="text-button" type="button">Español</button>
-      </nav>
+<a class="skip" href="#main">Skip to content</a>
+<div class="prototype-ribbon">PUBLIC DESIGN PROTOTYPE • NOT AN OFFICIAL FILING OR RECORD SYSTEM</div>
+<header class="site-header" id="top">
+  <div class="utility wrap">
+    <span>New Mexico water information and public services</span>
+    <nav aria-label="Utility links"><a href="#alerts">Alerts</a><a href="#offices">District offices</a><a href="#contact">Contact</a><button id="languageButton">Español</button></nav>
+  </div>
+  <div class="brand-row wrap">
+    <a class="brand" href="#top" aria-label="HYDROS home">
+      <span class="brand-symbol" aria-hidden="true"><i></i><b></b></span>
+      <span><strong>HYDROS</strong><small>New Mexico Water Management</small></span>
+    </a>
+    <form class="header-search" id="headerSearch" role="search"><label class="sr-only" for="headerQuery">Search</label><input id="headerQuery" placeholder="Search records, permits, maps…"><button>Search</button></form>
+    <button class="menu-button" id="menuButton" aria-expanded="false">Menu</button>
+  </div>
+  <nav class="main-nav" id="mainNav" aria-label="Main navigation">
+    <div class="wrap">
+      <a href="#services">Services</a><a href="#data">Data & maps</a><a href="#administration">Water administration</a><a href="#records">Records & research</a><a href="#offices">Offices</a><a href="#news">News & meetings</a><a href="#about">About HYDROS</a>
     </div>
-    <div class="nav-shell">
-      <a class="brand" href="#top" aria-label="HYDROS home">
-        <span class="brand-mark" aria-hidden="true"><span></span></span>
-        <span><strong>HYDROS</strong><small>New Mexico Digital Water Platform</small></span>
-      </a>
-      <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="primaryNav">Menu</button>
-      <nav id="primaryNav" class="primary-nav" aria-label="Primary navigation">
-        <a href="#services">Services</a>
-        <a href="#stories">Water Stories</a>
-        <a href="#map">Maps & Data</a>
-        <a href="#history">History</a>
-        <a href="#news">News</a>
-      </nav>
+  </nav>
+</header>
+
+<main id="main">
+<section class="hero">
+  <div class="hero-landscape" aria-hidden="true"><span class="sun"></span><span class="mountain far"></span><span class="mountain near"></span><span class="river"></span><span class="contours"></span></div>
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="kicker">The public front door to New Mexico water</p>
+      <h1>Find the water information you need.</h1>
+      <p>Search water rights, begin an application, explore statewide maps, review conditions, find your district office, and discover more than a century of New Mexico water history.</p>
+      <form class="hero-search" id="heroSearch" role="search"><label class="sr-only" for="heroQuery">Search HYDROS</label><input id="heroQuery" placeholder="Try a file number, owner, basin, county, or topic"><button>Search HYDROS</button></form>
+      <div class="hero-links"><a class="button primary" href="#services">Find a service</a><a class="button outline" href="#data">Open water atlas</a></div>
     </div>
-  </header>
+    <aside class="conditions-card" aria-label="Statewide water snapshot">
+      <div class="card-cap"><span>Statewide snapshot</span><small>Prototype data</small></div>
+      <div class="condition"><span class="condition-icon">≈</span><div><strong>Streamflow</strong><small>View current gauges</small></div><b>Explore</b></div>
+      <div class="condition"><span class="condition-icon">◒</span><div><strong>Reservoir storage</strong><small>Major facilities overview</small></div><b>Explore</b></div>
+      <div class="condition"><span class="condition-icon">☀</span><div><strong>Drought conditions</strong><small>State and basin indicators</small></div><b>Explore</b></div>
+      <a href="#data">View the full conditions dashboard →</a>
+    </aside>
+  </div>
+</section>
 
-  <main id="main">
-    <section class="hero" id="top">
-      <div class="hero-art" aria-hidden="true">
-        <div class="sun"></div><div class="mesa mesa-one"></div><div class="mesa mesa-two"></div><div class="river"></div>
-      </div>
-      <div class="hero-content wrap">
-        <p class="eyebrow">Water information, made useful</p>
-        <h1>One clear source for New Mexico water.</h1>
-        <p class="hero-copy">Search records, start applications, explore maps, understand conditions, and discover the stories shaping water stewardship across the state.</p>
-        <form class="hero-search" role="search" id="siteSearch">
-          <label class="sr-only" for="searchInput">Search HYDROS</label>
-          <input id="searchInput" type="search" placeholder="Search water rights, permits, places, records…" />
-          <button type="submit">Search HYDROS</button>
-        </form>
-        <div class="hero-actions">
-          <a class="button primary" href="#services">Find a service</a>
-          <a class="button secondary" href="#map">Explore the water map</a>
-        </div>
-      </div>
-    </section>
+<section class="alert-strip" id="alerts">
+  <div class="wrap"><span class="alert-label">NOTICE</span><div><strong>HYDROS modernization prototype</strong><p>This demonstration shows a future public experience. Use official agency channels for current filings, payments, and legal records.</p></div><button class="text-link" data-dialog="Prototype notice|This site is a non-production design prototype. No information entered here is transmitted or stored.">Learn more</button></div>
+</section>
 
-    <section class="task-section wrap" id="services">
-      <div class="section-heading">
-        <div><p class="eyebrow">Start here</p><h2>I want to…</h2></div>
-        <p>Fast paths to the most requested water services.</p>
-      </div>
-      <div class="task-grid" id="taskGrid"></div>
-    </section>
+<section class="section wrap" id="services">
+  <header class="section-head"><div><p class="kicker">Popular actions</p><h2>I want to…</h2></div><p>Direct routes to high-demand services, modeled on a clear public-service task structure and adapted for New Mexico.</p></header>
+  <div class="task-grid">
+    <button class="task" data-dialog="Search water rights|Search by owner, file number, point of diversion, county, basin, or legal description."><span>⌁</span><strong>Search water rights</strong><small>Find ownership and location records</small></button>
+    <button class="task" data-dialog="File an application|A guided intake would help identify the correct application, required documents, fees, and district office."><span>✎</span><strong>File an application</strong><small>Permits, changes, transfers, and more</small></button>
+    <button class="task" data-dialog="Find a form|Browse forms by service, applicant type, district, or subject instead of memorizing form numbers."><span>▤</span><strong>Find a form</strong><small>Browse forms and instructions</small></button>
+    <button class="task" data-dialog="Pay fees|Production payments would open a PCI-compliant hosted payment page. HYDROS would store only a transaction token and receipt metadata."><span>$</span><strong>Pay fees</strong><small>Secure hosted payment workflow</small></button>
+    <button class="task" data-dialog="Search a well|Search public well records using permit number, owner, location, depth, or status."><span>⌖</span><strong>Search for a well</strong><small>Permits, logs, and locations</small></button>
+    <button class="task" data-dialog="Use map tools|Open read-only ArcGIS maps with accessible layer summaries for water rights, wells, basins, reservoirs, acequias, and hydrography."><span>◉</span><strong>Use map tools</strong><small>Explore statewide GIS data</small></button>
+    <button class="task" data-dialog="Research records|Search OCR-indexed historical files, orders, maps, photographs, and legal records."><span>⌕</span><strong>Research records</strong><small>Archives from 1905 to today</small></button>
+    <button class="task" data-dialog="Ask HYDROS|A guided question form would route inquiries to the correct program or district office and provide a tracking number."><span>?</span><strong>Ask a question</strong><small>Get routed to the right team</small></button>
+  </div>
+</section>
 
-    <section class="status-band">
-      <div class="wrap status-grid">
-        <article><span class="status-icon">◉</span><div><strong>Statewide conditions</strong><p>View drought, streamflow, and reservoir indicators.</p></div><a href="#map">Open dashboard</a></article>
-        <article><span class="status-icon">✓</span><div><strong>Systems operational</strong><p>Public services are available in this prototype.</p></div><a href="#news">View status</a></article>
-      </div>
-    </section>
+<section class="service-band" id="administration">
+  <div class="wrap">
+    <header class="section-head light"><div><p class="kicker">Programs and responsibilities</p><h2>Water management services</h2></div><a href="#services">View all services →</a></header>
+    <div class="service-grid">
+      <article><span class="service-number">01</span><h3>Water rights administration</h3><p>Public information, filings, priority administration, adjudication resources, and district support.</p><a href="#records">Explore water rights</a></article>
+      <article><span class="service-number">02</span><h3>Dam safety</h3><p>Inspection, engineering review, emergency planning, inventories, and public-safety information.</p><button data-dialog="Dam safety|Future pages would organize dam inventories, engineering guidance, forms, emergency planning, and public notices.">Explore dam safety</button></article>
+      <article><span class="service-number">03</span><h3>Well permitting</h3><p>Applications, permit search, drillers, well records, construction standards, and groundwater guidance.</p><button data-dialog="Well permitting|The prototype would guide users from parcel information to the correct permit path and supporting documentation.">Explore well permitting</button></article>
+      <article><span class="service-number">04</span><h3>Interstate stream compacts</h3><p>Compact accounting, river operations, reports, meeting materials, and interstate coordination.</p><button data-dialog="Interstate compacts|A dedicated area would organize compact reports, accounting, meeting records, and basin dashboards.">Explore compacts</button></article>
+      <article><span class="service-number">05</span><h3>Hydrology and measurement</h3><p>Streamflow, groundwater levels, reservoir information, measurements, models, and technical resources.</p><a href="#data">Explore hydrology</a></article>
+      <article><span class="service-number">06</span><h3>Acequias and communities</h3><p>Plain-language resources connecting local water governance, records, maps, and assistance.</p><button data-dialog="Acequias and communities|Future content would be developed collaboratively and reviewed for legal, linguistic, and cultural accuracy.">Explore resources</button></article>
+    </div>
+  </div>
+</section>
 
-    <section class="story-section wrap" id="stories">
-      <div class="section-heading">
-        <div><p class="eyebrow">Water Stories</p><h2>New Mexico, told through water</h2></div>
-        <a href="#stories">View all stories</a>
-      </div>
-      <div class="story-grid">
-        <article class="story-card feature"><div class="story-image river-story"></div><div class="story-body"><span>Featured story</span><h3>A living river system</h3><p>Explore how snowpack, tributaries, reservoirs, communities, and water rights connect across the Rio Grande basin.</p><a href="#map">Explore the basin</a></div></article>
-        <article class="story-card"><div class="story-image acequia-story"></div><div class="story-body"><span>Community</span><h3>Acequias: shared water, shared responsibility</h3><p>A visual introduction to the governance traditions that continue to shape New Mexico.</p><a href="#history">Read the story</a></div></article>
-        <article class="story-card"><div class="story-image archive-story"></div><div class="story-body"><span>Archive</span><h3>Opening 120 years of water history</h3><p>Historical photographs and legal records become searchable, connected, and easier to understand.</p><a href="#history">Enter the archive</a></div></article>
-      </div>
-    </section>
+<section class="section data-section" id="data">
+  <div class="wrap data-grid">
+    <div class="data-copy"><p class="kicker">HYDROS Atlas</p><h2>See water in place.</h2><p>Move from statewide conditions to basin, district, parcel, structure, and document context. The production platform would embed approved read-only ArcGIS Online experiences and pair every map with accessible summaries.</p>
+      <div class="layer-list"><button class="active" data-layer="rivers">Rivers & streams</button><button data-layer="basins">Water basins</button><button data-layer="wells">Wells</button><button data-layer="rights">Water rights</button><button data-layer="reservoirs">Reservoirs</button><button data-layer="districts">District offices</button></div>
+      <button class="button primary" data-dialog="Launch HYDROS Atlas|This prototype map demonstrates the future experience. A production map would use approved ArcGIS Online layers and agency metadata.">Launch full map</button>
+    </div>
+    <div class="map-card">
+      <div class="map-top"><strong>New Mexico Water Atlas</strong><span id="layerLabel">Rivers & streams</span></div>
+      <svg class="nm-map" viewBox="0 0 700 560" role="img" aria-label="Stylized map of New Mexico water features">
+        <defs><pattern id="dots" width="12" height="12" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#97795d" opacity=".25"/></pattern></defs>
+        <path class="state-shape" d="M170 40 L535 48 L530 145 L585 155 L570 500 L138 492 L148 285 L105 260 L150 232 Z"/>
+        <path class="region r1" d="M180 63 C290 92 250 170 333 245 C367 278 330 385 265 470 L158 466 L164 276 L127 255 L165 223 Z"/>
+        <path class="region r2" d="M187 61 L500 70 L494 181 C402 160 370 220 326 232 C257 168 300 102 187 61 Z"/>
+        <path class="region r3" d="M342 248 C403 215 430 164 502 195 L545 469 L280 472 C352 395 386 295 342 248 Z"/>
+        <path class="rio main" d="M315 56 C297 117 344 153 315 218 C286 279 352 325 318 385 C298 420 315 459 300 497"/>
+        <path class="rio" d="M256 86 C275 128 260 171 315 218"/><path class="rio" d="M455 105 C419 171 435 230 392 292 C366 332 389 402 366 468"/><path class="rio thin" d="M205 205 C241 218 266 244 292 273"/>
+        <g class="reservoir-dots"><circle cx="314" cy="218" r="10"/><circle cx="318" cy="384" r="10"/><circle cx="392" cy="292" r="9"/><circle cx="274" cy="143" r="8"/></g>
+        <g class="map-labels"><text x="238" y="118">SAN JUAN</text><text x="310" y="170">RIO CHAMA</text><text x="326" y="285">RIO GRANDE</text><text x="406" y="340">PECOS</text><text x="205" y="370">GILA</text></g>
+      </svg>
+      <div class="map-legend"><span><i class="line"></i> Rivers</span><span><i class="fill"></i> Basins</span><span><i class="dot"></i> Reservoirs</span><small>Illustrative prototype map</small></div>
+    </div>
+  </div>
+</section>
 
-    <section class="map-section" id="map">
-      <div class="wrap map-layout">
-        <div class="map-copy"><p class="eyebrow">Maps & Data</p><h2>See water in place</h2><p>HYDROS brings public ArcGIS dashboards, basin information, stream gauges, reservoirs, district boundaries, and water-right records into one guided experience.</p><ul><li>Read-only public data consumption</li><li>Clear legends and accessible summaries</li><li>Mobile-friendly map exploration</li></ul><button class="button primary" id="mapLaunch">Launch interactive map</button></div>
-        <div class="map-panel" role="img" aria-label="Stylized prototype map of New Mexico water basins">
-          <div class="map-toolbar"><span>HYDROS Atlas</span><span>Layers&nbsp;&nbsp; Search&nbsp;&nbsp; Legend</span></div>
-          <svg viewBox="0 0 620 470" aria-hidden="true"><path class="state" d="M150 35 L478 42 L472 118 L516 129 L501 424 L128 418 L138 238 L105 221 L142 199 Z"/><path class="basin b1" d="M166 62 C250 92 212 172 283 210 C335 239 314 341 244 398 L145 396 L151 224 L125 211 L158 190 Z"/><path class="basin b2" d="M176 58 L446 64 L442 151 C357 143 328 195 277 205 C220 163 263 93 176 58 Z"/><path class="basin b3" d="M289 216 C348 194 361 145 450 163 L476 399 L258 399 C326 339 349 253 289 216 Z"/><path class="river-line" d="M268 54 C257 108 305 135 285 184 C265 231 320 267 287 319 C268 350 286 384 273 417"/><path class="river-line secondary" d="M414 93 C381 145 402 195 370 244 C348 280 368 335 349 395"/><circle cx="283" cy="184" r="8"/><circle cx="287" cy="319" r="8"/><circle cx="370" cy="244" r="8"/></svg>
-          <div class="map-legend"><span><i class="legend river-key"></i>Major rivers</span><span><i class="legend basin-key"></i>Basins</span><span><i class="legend reservoir-key"></i>Reservoirs</span></div>
-        </div>
-      </div>
-    </section>
+<section class="section records-section" id="records">
+  <div class="wrap">
+    <header class="section-head"><div><p class="kicker">Data, documents, and legal history</p><h2>Research water records</h2></div><p>One search layer across modern content, structured data, scanned documents, maps, and historical imagery.</p></header>
+    <div class="research-grid">
+      <article class="research-feature"><span>Unified search</span><h3>Search across systems</h3><p>Find water-right files, well records, orders, maps, photographs, reports, and OCR-indexed legal documents from a single query.</p><form id="recordSearch"><input id="recordQuery" placeholder="Enter owner, file number, basin, county, or keyword"><button>Search records</button></form><small>Prototype only. No official search is performed.</small></article>
+      <article><span>Legal archive</span><h3>1,379-page OCR collection</h3><p>Search inside scanned legal records, then inspect the original page image and citation context.</p><button data-dialog="OCR legal archive|The production search would preserve original page images, OCR confidence, document metadata, and stable citations.">Open archive</button></article>
+      <article><span>Redirect registry</span><h3>Legacy links preserved</h3><p>A managed registry maps failed and retired URLs to authoritative destinations, preserving bookmarks and search value.</p><button data-dialog="Redirect registry|The registry would import audited legacy URLs, track status and ownership, test destinations, and report unresolved links.">View approach</button></article>
+    </div>
+  </div>
+</section>
 
-    <section class="timeline-section wrap" id="history">
-      <div class="section-heading"><div><p class="eyebrow">1905 to today</p><h2>A century of water stewardship</h2></div><p>Choose an era to explore key moments, images, laws, and projects.</p></div>
-      <div class="timeline-tabs" role="tablist" aria-label="Historical eras" id="timelineTabs"></div>
-      <article class="timeline-detail" id="timelineDetail" aria-live="polite"></article>
-    </section>
+<section class="section offices" id="offices">
+  <div class="wrap office-grid">
+    <div><p class="kicker">Local assistance</p><h2>Find your district office</h2><p>Water administration is rooted in place. HYDROS makes office responsibilities, contacts, service areas, hours, forms, and local notices easier to find.</p><label for="officeSelect">Choose a region</label><select id="officeSelect"><option value="">Select a district or basin</option><option>Albuquerque / Middle Rio Grande</option><option>Aztec / San Juan</option><option>Deming / Lower Rio Grande</option><option>Las Cruces / Lower Rio Grande</option><option>Roswell / Pecos</option><option>Santa Fe / Upper Rio Grande</option><option>Socorro / Middle Rio Grande</option></select><div id="officeResult" class="office-result" aria-live="polite">Select a region to preview office information.</div></div>
+    <div class="office-art" aria-hidden="true"><span class="adobe"></span><span class="portal"></span><span class="yucca y1"></span><span class="yucca y2"></span><span class="horizon"></span></div>
+  </div>
+</section>
 
-    <section class="news-section" id="news">
-      <div class="wrap">
-        <div class="section-heading"><div><p class="eyebrow">News & Notices</p><h2>What’s happening now</h2></div><a href="#news">View all updates</a></div>
-        <div class="news-list">
-          <article><time>August 2026</time><h3>HYDROS public prototype launches</h3><p>A new homepage concept puts services, stories, maps, and records within easier reach.</p></article>
-          <article><time>Public notice</time><h3>Water-right filing guidance updated</h3><p>Plain-language checklists help applicants prepare complete submissions.</p></article>
-          <article><time>Data update</time><h3>Reservoir and streamflow dashboard refreshed</h3><p>Explore current indicators through a unified, mobile-ready interface.</p></article>
-        </div>
-      </div>
-    </section>
+<section class="section stories" id="news">
+  <div class="wrap">
+    <header class="section-head"><div><p class="kicker">Stories, notices, and meetings</p><h2>New Mexico water now</h2></div><div class="tab-buttons"><button class="active" data-news="stories">Water stories</button><button data-news="notices">Public notices</button><button data-news="meetings">Meetings</button></div></header>
+    <div class="news-grid" id="newsGrid">
+      <article class="lead-story"><div class="story-visual river-visual"><span></span></div><div><p class="meta">FEATURED WATER STORY</p><h3>The Rio Grande as a living system</h3><p>Follow water from mountain snow and tributaries through reservoirs, acequias, cities, farms, habitats, compacts, and water-right records.</p><a href="#data">Explore the river system →</a></div></article>
+      <article><p class="meta">COMMUNITY</p><h3>Acequia knowledge and shared stewardship</h3><p>An accessible introduction to local governance, seasonal work, records, and community continuity.</p><button data-dialog="Acequia story|This prototype story is a placeholder for content developed with subject-matter and community review.">Read story</button></article>
+      <article><p class="meta">HISTORY</p><h3>Opening 120 years of water records</h3><p>Digitization connects photographs, maps, orders, engineering documents, and legal history.</p><a href="#timeline">Explore timeline</a></article>
+    </div>
+  </div>
+</section>
 
-    <section class="prototype-note wrap"><strong>Prototype notice</strong><p>HYDROS is a design and technology demonstration. Transactions, applications, maps, and search results shown here are placeholders and do not represent official records or services.</p></section>
-  </main>
+<section class="section timeline" id="timeline">
+  <div class="wrap">
+    <header class="section-head light"><div><p class="kicker">1905 to the future</p><h2>A living water timeline</h2></div><p>Historical records become easier to understand when time, place, law, infrastructure, and community stories are connected.</p></header>
+    <div class="timeline-rail" id="timelineRail">
+      <button class="active" data-era="1905">1905</button><button data-era="1938">1938</button><button data-era="1956">1956</button><button data-era="1972">1972</button><button data-era="2000">2000</button><button data-era="2026">Today</button>
+    </div>
+    <article class="era-card" id="eraCard"><p class="meta">1905 • FOUNDATIONS</p><h3>Building a durable public record</h3><p>The State Engineer era establishes a formal administrative foundation for water rights, measurement, engineering, and public records across New Mexico.</p><div><span>Historical photographs</span><span>Orders and decisions</span><span>Maps and surveys</span></div></article>
+  </div>
+</section>
 
-  <footer class="site-footer" id="contact">
-    <div class="wrap footer-grid"><div><a class="brand footer-brand" href="#top"><span class="brand-mark"><span></span></span><span><strong>HYDROS</strong><small>New Mexico Digital Water Platform</small></span></a><p>Where authoritative water information flows.</p></div><div><h2>Services</h2><a href="#services">Permits & applications</a><a href="#services">Water-right search</a><a href="#map">Maps & data</a></div><div><h2>Agency</h2><a href="#stories">Water Stories</a><a href="#history">Historical archive</a><a href="#news">News & notices</a></div><div id="accessibility"><h2>Public access</h2><a href="#accessibility">Accessibility</a><a href="#accessibility">Privacy</a><a href="#accessibility">Language access</a></div></div>
-    <div class="wrap footer-bottom"><span>HYDROS prototype</span><span>Built for transparent, accessible public service</span></div>
-  </footer>
+<section class="section about" id="about">
+  <div class="wrap about-grid"><div><p class="kicker">Designed for public trust</p><h2>Modern technology. Clear governance.</h2></div><div class="principles"><article><strong>Drupal governance</strong><p>Bureaus draft and review content; the PIO/Webmaster retains final publication authority through auditable workflow.</p></article><article><strong>React experience</strong><p>A fast, accessible, mobile-first public interface consumes structured content and approved service APIs.</p></article><article><strong>Secure transactions</strong><p>Hosted payment pages and tokenized integrations minimize PCI scope and keep cardholder data outside HYDROS.</p></article><article><strong>Language access</strong><p>Manual Spanish translations begin with high-value landing pages and services, supported by editorial review.</p></article></div></div>
+</section>
+</main>
 
-  <dialog id="prototypeDialog"><button class="dialog-close" aria-label="Close dialog">×</button><p class="eyebrow">Prototype interaction</p><h2 id="dialogTitle">HYDROS service</h2><p id="dialogCopy"></p><button class="button primary dialog-close">Return to prototype</button></dialog>
-  <script src="app.js"></script>
+<footer id="contact">
+  <div class="wrap footer-grid">
+    <div><a class="brand footer-brand" href="#top"><span class="brand-symbol"><i></i><b></b></span><span><strong>HYDROS</strong><small>New Mexico Water Management</small></span></a><p>Where authoritative water information flows.</p><p class="prototype-copy">Design prototype. Not an official State of New Mexico website.</p></div>
+    <div><h2>Services</h2><a href="#services">Applications and permits</a><a href="#records">Water records</a><a href="#data">Maps and data</a><a href="#offices">District offices</a></div>
+    <div><h2>Information</h2><a href="#news">News and notices</a><a href="#timeline">Historical archive</a><a href="#about">About the platform</a><a href="#alerts">System status</a></div>
+    <div><h2>Public access</h2><a href="#contact">Contact</a><a href="#top">Accessibility</a><a href="#top">Privacy</a><a href="#top">Language access</a></div>
+  </div>
+  <div class="wrap footer-bottom"><span>HYDROS prototype • August 2026</span><span>New Mexico water, connected</span></div>
+</footer>
+
+<dialog id="dialog"><button class="dialog-x" aria-label="Close">×</button><p class="kicker">HYDROS prototype</p><h2 id="dialogTitle"></h2><p id="dialogText"></p><button class="button primary dialog-close">Close</button></dialog>
+<script src="app.js"></script>
 </body>
 </html>
