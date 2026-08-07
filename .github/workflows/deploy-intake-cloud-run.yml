@@ -1,0 +1,58 @@
+name: Deploy HYDROS Secure Intake
+
+on:
+  workflow_dispatch:
+    inputs:
+      region:
+        description: Cloud Run region
+        required: false
+        default: us-central1
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: services/intake-api
+    steps:
+      - uses: actions/checkout@v4
+
+      - id: auth
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ secrets.GCP_DEPLOY_SERVICE_ACCOUNT }}
+
+      - uses: google-github-actions/setup-gcloud@v2
+
+      - name: Deploy scanner
+        env:
+          PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+          REGION: ${{ inputs.region }}
+          RUNTIME_SA: ${{ secrets.HYDROS_RUNTIME_SERVICE_ACCOUNT }}
+          ALLOWED_ORIGINS: https://gavinlujan42-glitch.github.io
+        run: bash deploy-cloud-run.sh
+
+      - name: Discover service URL
+        id: url
+        env:
+          PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+          REGION: ${{ inputs.region }}
+        run: |
+          gcloud config set project "$PROJECT_ID"
+          URL=$(gcloud run services describe hydros-secure-intake --region "$REGION" --format='value(status.url)')
+          echo "url=$URL" >> "$GITHUB_OUTPUT"
+
+      - name: Security smoke tests
+        run: bash smoke-test.sh "${{ steps.url.outputs.url }}"
+
+      - name: Deployment summary
+        run: |
+          echo "### HYDROS Secure Intake" >> "$GITHUB_STEP_SUMMARY"
+          echo "Service: ${{ steps.url.outputs.url }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "Health: ${{ steps.url.outputs.url }}/health" >> "$GITHUB_STEP_SUMMARY"
+          echo "Blocked-file and EICAR malware smoke tests passed before this workflow completed." >> "$GITHUB_STEP_SUMMARY"
