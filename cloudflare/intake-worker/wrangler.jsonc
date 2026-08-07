@@ -1,0 +1,31 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "hydros-secure-intake",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-08-01",
+  "observability": { "enabled": true },
+  "vars": {
+    "ALLOWED_ORIGIN": "https://gavinlujan42-glitch.github.io",
+    "MAX_UPLOAD_BYTES": "52428800"
+  },
+  "r2_buckets": [
+    { "binding": "QUARANTINE", "bucket_name": "hydros-quarantine" },
+    { "binding": "CLEAN", "bucket_name": "hydros-approved" },
+    { "binding": "SCAN_REPORTS", "bucket_name": "hydros-scan-reports" }
+  ],
+  "containers": [
+    {
+      "max_instances": 5,
+      "class_name": "MalwareScanner",
+      "image": "./scanner/Dockerfile"
+    }
+  ],
+  "durable_objects": {
+    "bindings": [
+      { "name": "MALWARE_SCANNER", "class_name": "MalwareScanner" }
+    ]
+  },
+  "migrations": [
+    { "tag": "v1", "new_sqlite_classes": ["MalwareScanner"] }
+  ]
+}
