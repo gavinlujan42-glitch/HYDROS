@@ -1,7 +1,7 @@
-// HYDROS runtime configuration. Updated automatically by the secure-intake deployment workflow.
+// HYDROS runtime configuration. Deployment automation replaces uploadApi after Cloudflare deploy.
 window.HYDROS_CONFIG = Object.freeze({
   uploadApi: "",
-  uploadMode: "backend-only",
-  repository: "Google Drive",
-  security: "ClamAV + YARA + MIME/archive validation + SHA-256"
+  uploadMode: "cloudflare-r2",
+  repository: "Cloudflare R2",
+  security: "R2 quarantine + ClamAV + YARA + archive validation + SHA-256"
 });
