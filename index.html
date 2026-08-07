@@ -5,9 +5,16 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="description" content="HYDROS prototype, a New Mexico digital water management portal.">
   <title>HYDROS | New Mexico Water Management</title>
-  <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.6.1/dist/maplibre-gl.css">\n  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.6.1/dist/maplibre-gl.css">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .experience-switch{position:fixed;top:10px;left:50%;transform:translateX(-50%);z-index:1000;display:flex;gap:3px;padding:4px;background:#ffffffea;border:1px solid #cfe3e1;border-radius:999px;box-shadow:0 8px 24px #0b312a22;backdrop-filter:blur(10px)}
+    .experience-switch a{padding:7px 12px;border-radius:999px;text-decoration:none;font-size:.72rem;font-weight:900;letter-spacing:.04em;color:#56706d}.experience-switch a.active{background:#123d38;color:#fff}.experience-switch a:hover{background:#e7f4f1}.experience-switch a.active:hover{background:#123d38}
+    @media(max-width:620px){.experience-switch{top:7px}.experience-switch a{padding:6px 9px;font-size:.66rem}}
+  </style>
 </head>
 <body>
+<nav class="experience-switch" aria-label="Choose experience"><a class="active" href="index.html" aria-current="page">HYDROS</a><a href="aquaos.html">AQUAOS</a></nav>
 <a class="skip" href="#main">Skip to content</a>
 <div class="prototype-ribbon">PUBLIC DESIGN PROTOTYPE • NOT AN OFFICIAL FILING OR RECORD SYSTEM</div>
 <header class="site-header" id="top">
@@ -202,6 +209,7 @@
 </footer>
 
 <dialog id="dialog"><button class="dialog-x" aria-label="Close">×</button><p class="kicker">HYDROS prototype</p><h2 id="dialogTitle"></h2><p id="dialogText"></p><button class="button primary dialog-close">Close</button></dialog>
-<script src="https://unpkg.com/maplibre-gl@5.6.1/dist/maplibre-gl.js"></script>\n<script src="app.js"></script>
+<script src="https://unpkg.com/maplibre-gl@5.6.1/dist/maplibre-gl.js"></script>
+<script src="app.js"></script>
 </body>
 </html>
