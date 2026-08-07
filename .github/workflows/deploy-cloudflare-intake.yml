@@ -1,0 +1,71 @@
+name: Deploy HYDROS Cloudflare Intake
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: cloudflare/intake-worker
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: cloudflare/intake-worker/package.json
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Create R2 buckets if missing
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          npx wrangler r2 bucket create hydros-quarantine || true
+          npx wrangler r2 bucket create hydros-approved || true
+          npx wrangler r2 bucket create hydros-scan-reports || true
+
+      - name: Deploy Worker + ClamAV/YARA container
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: npx wrangler deploy
+
+      - name: Configure public HYDROS intake URL
+        env:
+          WORKERS_SUBDOMAIN: ${{ secrets.CLOUDFLARE_WORKERS_SUBDOMAIN }}
+        working-directory: .
+        run: |
+          test -n "$WORKERS_SUBDOMAIN"
+          API="https://hydros-secure-intake.${WORKERS_SUBDOMAIN}.workers.dev"
+          git fetch origin gh-pages
+          git checkout gh-pages
+          cat > hydros-config.js <<EOF
+          window.HYDROS_CONFIG = Object.freeze({
+            uploadApi: "$API",
+            uploadMode: "cloudflare-r2",
+            repository: "Cloudflare R2",
+            security: "R2 quarantine + ClamAV + YARA + archive validation + SHA-256"
+          });
+          EOF
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add hydros-config.js
+          git commit -m "Activate HYDROS Cloudflare R2 intake" || true
+          git push origin gh-pages
+
+      - name: Smoke-test health
+        env:
+          WORKERS_SUBDOMAIN: ${{ secrets.CLOUDFLARE_WORKERS_SUBDOMAIN }}
+        working-directory: .
+        run: |
+          sleep 15
+          curl --fail --retry 8 --retry-delay 10 "https://hydros-secure-intake.${WORKERS_SUBDOMAIN}.workers.dev/health"
