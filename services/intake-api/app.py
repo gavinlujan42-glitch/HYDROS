@@ -1,5 +1,4 @@
 import hashlib
-import json
 import os
 import pathlib
 import re
@@ -10,6 +9,7 @@ from datetime import datetime, timezone
 
 from fastapi import FastAPI, File, Form, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
+import google.auth
 from google.oauth2 import service_account
 from googleapiclient.discovery import build
 from googleapiclient.http import MediaFileUpload
@@ -33,6 +33,7 @@ DRIVE_FOLDERS = {
     "wells": os.getenv("DRIVE_WELLS_FOLDER_ID", "1M-e0JSdUAr-x8V2na2wMMvvwTgem_1oQ"),
 }
 DEFAULT_CLEAN_FOLDER = os.getenv("DRIVE_CLEAN_FOLDER_ID", "18hgyov-ABu0rXyTFa0tsn4z0SUd1cUSt")
+DRIVE_SCOPE = "https://www.googleapis.com/auth/drive.file"
 
 
 def safe_name(name: str) -> str:
@@ -93,9 +94,11 @@ def yara_scan(path: str):
 
 def drive_client():
     key_path = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
-    if not key_path:
-        raise HTTPException(503, "Drive service credentials are not configured")
-    creds = service_account.Credentials.from_service_account_file(key_path, scopes=["https://www.googleapis.com/auth/drive.file"])
+    if key_path:
+        creds = service_account.Credentials.from_service_account_file(key_path, scopes=[DRIVE_SCOPE])
+    else:
+        # Preferred on Cloud Run / GKE / other workload-identity platforms.
+        creds, _ = google.auth.default(scopes=[DRIVE_SCOPE])
     return build("drive", "v3", credentials=creds, cache_discovery=False)
 
 
